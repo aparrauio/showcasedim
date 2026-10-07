@@ -1,5 +1,12 @@
 [
-  { "url": "https://aparrauio.github.io/i2h-report-2026/", "title": "I2H 2026", "category": "Interact2Hack", "tags": ["hackathon", "tech"] },
-  { "url": "https://aparrauio.github.io/transformacion-digital-restaurantes-2026/", "title": "Transformación Digital en restaurantes", "category": "Transformación Digital", "tags": ["restaurantes", "tech"] },
-  { "url": "https://tunequeue.onrender.com/", "title": "Tunequeue: crea listas de reproducción para YouTube", "category": "Music App", "tags": ["music", "youtube", "tech"] }
+  { "url": "https://pawnee-app-amelia.onrender.com/", "title": "Amelia", "category": "Pawnee App", "tags": ["Amelia", "DIM"] },
+  { "url": "https://pawnee-app-paula.onrender.com/", "title": "Paula", "category": "Pawnee App", "tags": ["Paula", "DIM"] },
+  { "url": "https://pawnee-app-front-ari.onrender.com/", "title": "Ariana", "category": "Pawnee App", "tags": ["Ariana", "DIM"] },
+  { "url": "https://pawnee-app-ih7o.onrender.com/", "title": "Ricardo", "category": "Pawnee App", "tags": ["Ricardo", "DIM"] },
+  { "url": "https://pawnee-app-juanes.onrender.com/", "title": "Juanes", "category": "Pawnee App", "tags": ["Juanes", "DIM"] },
+  { "url": "https://pawnee-app-pablovargas.onrender.com/", "title": "Pablo", "category": "Pawnee App", "tags": ["Pablo", "DIM"] },
+  { "url": "https://pawnee-app-front.onrender.com/", "title": "Ismael", "category": "Pawnee App", "tags": ["Ismael", "DIM"] },
+  { "url": "https://pawnee-app-alexanderkholodov.onrender.com/", "title": "Alexander", "category": "Pawnee App", "tags": ["Alexander", "DIM"] },
+  { "url": "https://pawnee-app-trlm.onrender.com/", "title": "Andres", "category": "Pawnee App", "tags": ["Andres", "DIM"] },
+  { "url": "https://pawnee.onrender.com/", "title": "Nicole", "category": "Pawnee App", "tags": ["Nicole", "DIM"] }
 ]
