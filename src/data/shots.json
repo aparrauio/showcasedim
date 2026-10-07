@@ -1,0 +1,86 @@
+{
+  "cal-com": {
+    "ok": true,
+    "file": "shots/cal-com.webp",
+    "width": 720,
+    "height": 1800,
+    "capturedAt": "2026-10-07T14:35:08.275Z"
+  },
+  "figma-com": {
+    "ok": true,
+    "file": "shots/figma-com.webp",
+    "width": 720,
+    "height": 450,
+    "capturedAt": "2026-10-07T14:40:31.284Z"
+  },
+  "framer-com": {
+    "ok": true,
+    "file": "shots/framer-com.webp",
+    "width": 720,
+    "height": 450,
+    "capturedAt": "2026-10-07T14:40:45.316Z"
+  },
+  "linear-app": {
+    "ok": true,
+    "file": "shots/linear-app.webp",
+    "width": 720,
+    "height": 1800,
+    "capturedAt": "2026-10-07T14:35:06.544Z"
+  },
+  "notion-com": {
+    "ok": true,
+    "file": "shots/notion-com.webp",
+    "width": 720,
+    "height": 1800,
+    "capturedAt": "2026-10-07T14:35:07.088Z"
+  },
+  "posthog-com": {
+    "ok": true,
+    "file": "shots/posthog-com.webp",
+    "width": 720,
+    "height": 450,
+    "capturedAt": "2026-10-07T14:35:31.530Z"
+  },
+  "railway-com": {
+    "ok": true,
+    "file": "shots/railway-com.webp",
+    "width": 720,
+    "height": 1800,
+    "capturedAt": "2026-10-07T14:35:18.666Z"
+  },
+  "raycast-com": {
+    "ok": true,
+    "file": "shots/raycast-com.webp",
+    "width": 720,
+    "height": 450,
+    "capturedAt": "2026-10-07T14:41:04.172Z"
+  },
+  "resend-com": {
+    "ok": true,
+    "file": "shots/resend-com.webp",
+    "width": 720,
+    "height": 1800,
+    "capturedAt": "2026-10-07T14:35:59.679Z"
+  },
+  "stripe-com": {
+    "ok": true,
+    "file": "shots/stripe-com.webp",
+    "width": 720,
+    "height": 1800,
+    "capturedAt": "2026-10-07T14:35:41.740Z"
+  },
+  "supabase-com": {
+    "ok": true,
+    "file": "shots/supabase-com.webp",
+    "width": 720,
+    "height": 1800,
+    "capturedAt": "2026-10-07T14:35:17.019Z"
+  },
+  "vercel-com": {
+    "ok": true,
+    "file": "shots/vercel-com.webp",
+    "width": 720,
+    "height": 1800,
+    "capturedAt": "2026-10-07T14:35:14.892Z"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "showcasedim",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DIM: fullstack web-app showcase",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "shots": "node scripts/screenshots.mjs",
+    "shots:force": "node scripts/screenshots.mjs --force"
+  },
+  "dependencies": {
+    "astro": "^7.3.6"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.5"
+  }
+}

@@ -1,0 +1,240 @@
+---
+import sites from '../data/sites.json';
+import shots from '../data/shots.json';
+import { slugFromUrl, domainFromUrl } from '../lib/slug.mjs';
+
+const TITLE = 'DIM: fullstack web-app showcase';
+const DESCRIPTION = 'Una galería de webs de aplicaciones fullstack: mira la home de cada una y ábrela a pantalla completa.';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const items = sites.map((site) => {
+  const slug = slugFromUrl(site.url);
+  const shot = shots[slug]?.ok ? shots[slug] : null;
+  const domain = domainFromUrl(site.url);
+  // Cuanto más larga es la captura, más lento el desplazamiento al pasar el ratón.
+  const ratio = shot ? shot.height / shot.width : 1;
+  return {
+    ...site,
+    slug,
+    domain,
+    tags: site.tags ?? [],
+    image: shot ? `${base}${shot.file}?v=${Date.parse(shot.capturedAt)}` : null,
+    scrollSeconds: Math.min(Math.max(ratio * 1.6, 1.5), 9).toFixed(1),
+    search: [site.title, domain, site.category, ...(site.tags ?? [])].join(' ').toLowerCase(),
+  };
+});
+
+const categories = [...new Set(items.map((i) => i.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es'));
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{TITLE}</title>
+    <meta name="description" content={DESCRIPTION} />
+    <meta property="og:title" content={TITLE} />
+    <meta property="og:description" content={DESCRIPTION} />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="wrap">
+        <p class="eyebrow">{items.length} webs seleccionadas</p>
+        <h1><span class="mark">DIM:</span> fullstack web-app showcase</h1>
+        <p class="lede">{DESCRIPTION}</p>
+
+        <div class="controls">
+          <label class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            <input id="q" type="search" placeholder="Buscar por nombre, dominio o etiqueta…" autocomplete="off" aria-label="Buscar" />
+          </label>
+          <div class="chips" role="group" aria-label="Filtrar por categoría">
+            <button class="chip" data-cat="" aria-pressed="true">Todas</button>
+            {categories.map((c) => <button class="chip" data-cat={c} aria-pressed="false">{c}</button>)}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <ul class="grid" id="grid">
+        {items.map((item) => (
+          <li class="card" data-cat={item.category} data-search={item.search}>
+            <a href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${item.title} en una pestaña nueva`}>
+              <div class="frame" style={`--scroll: ${item.scrollSeconds}s`}>
+                {item.image ? (
+                  <img src={item.image} alt={`Captura de la home de ${item.title}`} loading="lazy" decoding="async" />
+                ) : (
+                  <div class="placeholder"><span>{item.domain}</span></div>
+                )}
+                <span class="open">Abrir ↗</span>
+              </div>
+              <div class="meta">
+                <img class="favicon" src={`https://www.google.com/s2/favicons?domain=${item.domain}&sz=64`} alt="" width="20" height="20" loading="lazy" />
+                <div class="text">
+                  <h2>{item.title}</h2>
+                  <p>{item.domain}</p>
+                </div>
+                {item.category && <span class="badge">{item.category}</span>}
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="empty" id="empty" hidden>No hay webs que coincidan con la búsqueda.</p>
+    </main>
+
+    <footer class="wrap footer">
+      <p>DIM · Las capturas se actualizan automáticamente cada semana.</p>
+    </footer>
+
+    <script>
+      const grid = document.getElementById('grid')!;
+      const cards = [...grid.querySelectorAll<HTMLElement>('.card')];
+      const input = document.getElementById('q') as HTMLInputElement;
+      const chips = [...document.querySelectorAll<HTMLButtonElement>('.chip')];
+      const empty = document.getElementById('empty')!;
+      let category = '';
+
+      function apply() {
+        const q = input.value.trim().toLowerCase();
+        let visible = 0;
+        for (const card of cards) {
+          const show = (!category || card.dataset.cat === category) && (!q || card.dataset.search!.includes(q));
+          card.hidden = !show;
+          if (show) visible++;
+        }
+        empty.hidden = visible > 0;
+      }
+
+      input.addEventListener('input', apply);
+      for (const chip of chips) {
+        chip.addEventListener('click', () => {
+          category = chip.dataset.cat ?? '';
+          chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+          apply();
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #fafaf9;
+    --surface: #ffffff;
+    --text: #0c0a09;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4f46e5;
+    --accent-soft: #eef2ff;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px -12px rgb(0 0 0 / 0.12);
+    --shadow-hover: 0 2px 4px rgb(0 0 0 / 0.06), 0 24px 48px -16px rgb(0 0 0 / 0.22);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0c0a09;
+      --surface: #1c1917;
+      --text: #fafaf9;
+      --muted: #a8a29e;
+      --border: #292524;
+      --accent: #818cf8;
+      --accent-soft: #1e1b4b;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.4);
+      --shadow-hover: 0 24px 48px -16px rgb(0 0 0 / 0.7);
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1440px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 768px) { .wrap { padding: 0 32px; } }
+
+  /* Cabecera */
+  .hero { padding: 64px 0 32px; }
+  .eyebrow { margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+  h1 { margin: 0; font-size: clamp(32px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; }
+  h1 .mark { color: var(--accent); }
+  .lede { max-width: 620px; margin: 16px 0 0; font-size: 17px; line-height: 1.55; color: var(--muted); }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; margin-top: 32px; }
+  .search { position: relative; flex: 1 1 280px; max-width: 420px; }
+  .search svg { position: absolute; left: 14px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); fill: none; stroke: var(--muted); stroke-width: 2; stroke-linecap: round; }
+  .search input {
+    width: 100%; height: 44px; padding: 0 16px 0 42px;
+    border: 1px solid var(--border); border-radius: 999px; background: var(--surface);
+    color: var(--text); font: inherit; font-size: 15px; outline: none;
+  }
+  .search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    height: 36px; padding: 0 14px; border: 1px solid var(--border); border-radius: 999px;
+    background: var(--surface); color: var(--text); font: inherit; font-size: 14px; font-weight: 500; cursor: pointer;
+  }
+  .chip:hover { border-color: var(--muted); }
+  .chip[aria-pressed='true'] { background: var(--text); border-color: var(--text); color: var(--bg); }
+
+  /* Mosaico */
+  .grid {
+    list-style: none; margin: 0; padding: 0 0 64px;
+    display: grid; gap: 40px 28px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  }
+  .card[hidden] { display: none; }
+  .card a { display: block; color: inherit; text-decoration: none; }
+  .card a:focus-visible { outline: none; }
+  .card a:focus-visible .frame { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+  .frame {
+    position: relative; aspect-ratio: 16 / 10; overflow: hidden;
+    border: 1px solid var(--border); border-radius: 14px; background: var(--surface);
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .frame > img {
+    display: block; width: 100%; height: 100%;
+    object-fit: cover; object-position: top center;
+    transition: object-position var(--scroll) ease-in-out;
+  }
+  .card a:hover .frame { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .card a:hover .frame > img { object-position: bottom center; }
+  }
+  .open {
+    position: absolute; right: 12px; bottom: 12px;
+    padding: 6px 12px; border-radius: 999px;
+    background: rgb(12 10 9 / 0.85); color: #fff; font-size: 13px; font-weight: 600;
+    opacity: 0; transform: translateY(4px); transition: opacity 0.2s, transform 0.2s;
+  }
+  .card a:hover .open, .card a:focus-visible .open { opacity: 1; transform: none; }
+
+  .placeholder {
+    display: grid; place-items: center; height: 100%;
+    background: repeating-linear-gradient(45deg, var(--bg), var(--bg) 12px, var(--surface) 12px, var(--surface) 24px);
+    color: var(--muted); font-weight: 600;
+  }
+
+  .meta { display: flex; align-items: center; gap: 12px; padding: 14px 4px 0; }
+  .favicon { flex: none; width: 20px; height: 20px; border-radius: 5px; }
+  .text { min-width: 0; flex: 1; }
+  .meta h2 { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  .meta p { margin: 2px 0 0; font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .badge { flex: none; padding: 4px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 600; }
+
+  .empty { padding: 48px 0; text-align: center; color: var(--muted); }
+  .footer { padding-bottom: 48px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
+  .footer p { margin: 24px 0 0; }
+</style>
