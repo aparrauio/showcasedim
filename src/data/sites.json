@@ -1,14 +1,5 @@
 [
-  { "url": "https://linear.app", "title": "Linear", "category": "Productividad", "tags": ["project management", "dark"] },
-  { "url": "https://www.notion.com", "title": "Notion", "category": "Productividad", "tags": ["docs", "wiki"] },
-  { "url": "https://cal.com", "title": "Cal.com", "category": "Productividad", "tags": ["scheduling", "open source"] },
-  { "url": "https://vercel.com", "title": "Vercel", "category": "Dev tools", "tags": ["hosting", "frontend"] },
-  { "url": "https://supabase.com", "title": "Supabase", "category": "Dev tools", "tags": ["database", "backend"] },
-  { "url": "https://railway.com", "title": "Railway", "category": "Dev tools", "tags": ["hosting", "infra"] },
-  { "url": "https://resend.com", "title": "Resend", "category": "Dev tools", "tags": ["email", "api"] },
-  { "url": "https://posthog.com", "title": "PostHog", "category": "Analítica", "tags": ["product analytics", "open source"] },
-  { "url": "https://stripe.com", "title": "Stripe", "category": "Pagos", "tags": ["payments", "api"] },
-  { "url": "https://www.figma.com", "title": "Figma", "category": "Diseño", "tags": ["design", "collaboration"] },
-  { "url": "https://www.raycast.com", "title": "Raycast", "category": "Productividad", "tags": ["launcher", "macos"] },
-  { "url": "https://www.framer.com", "title": "Framer", "category": "Diseño", "tags": ["no-code", "websites"] }
+  { "url": "https://aparrauio.github.io/i2h-report-2026/", "title": "I2H 2026", "category": "Interact2Hack", "tags": ["hackathon", "tech"] },
+  { "url": "https://aparrauio.github.io/transformacion-digital-restaurantes-2026/", "title": "Transformación Digital en restaurantes", "category": "Transformación Digital", "tags": ["restaurantes", "tech"] },
+  { "url": "https://tunequeue.onrender.com/", "title": "Tunequeue: crea listas de reproducción para YouTube", "category": "Music App", "tags": ["music", "youtube", "tech"] }
 ]
