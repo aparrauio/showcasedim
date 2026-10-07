@@ -1,4 +1,18 @@
 {
+  "pawmee-app-mg27-onrender-com": {
+    "ok": true,
+    "file": "shots/pawmee-app-mg27-onrender-com.webp",
+    "width": 720,
+    "height": 611,
+    "capturedAt": "2026-10-07T16:29:22.533Z"
+  },
+  "pawnee-app-1-onrender-com": {
+    "ok": true,
+    "file": "shots/pawnee-app-1-onrender-com.webp",
+    "width": 720,
+    "height": 500,
+    "capturedAt": "2026-10-07T16:29:22.360Z"
+  },
   "pawnee-app-alexanderkholodov-onrender-com": {
     "ok": true,
     "file": "shots/pawnee-app-alexanderkholodov-onrender-com.webp",
@@ -61,12 +75,5 @@
     "width": 720,
     "height": 538,
     "capturedAt": "2026-10-07T16:10:25.741Z"
-  },
-  "pawnee-onrender-com": {
-    "ok": true,
-    "file": "shots/pawnee-onrender-com.webp",
-    "width": 720,
-    "height": 450,
-    "capturedAt": "2026-10-07T16:10:27.545Z"
   }
 }
